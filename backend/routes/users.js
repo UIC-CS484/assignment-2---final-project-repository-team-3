@@ -8,6 +8,10 @@ router.get('/', function (req, res, next) {
     res.send('respond with a resource');
 });
 
+router.get('/register', function (req, res, next) {
+    res.render('register');
+});
+
 // Register User Listing
 router.post('/register', (req, res, next) => {
     const firstName = req.body.firstName;
@@ -31,7 +35,7 @@ router.post('/register', (req, res, next) => {
             let temp = JSON.parse(data)
             temp[user.email] = user
             fs.writeFile("users.json", JSON.stringify(temp, null, 2), err => {
-                res.send("success")
+                res.render('login');
             });
         })
     } else {

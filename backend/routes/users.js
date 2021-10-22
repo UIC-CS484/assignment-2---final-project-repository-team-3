@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
+const passport = require('passport');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -18,7 +19,7 @@ router.post('/register', (req, res, next) => {
 
     if (strongPassword.test(password)) {
         'use strict';
-        var randomValue = Math.random() * 123;
+        const randomValue = Math.random() * 123;
         let user = {
             id: randomValue,
             firstName: firstName,
@@ -26,8 +27,8 @@ router.post('/register', (req, res, next) => {
             email: email,
             password: password
         }
-        let i = fs.readFile('users.json', (err, data) => {
-            var temp = JSON.parse(data)
+        fs.readFile('users.json', (err, data) => {
+            let temp = JSON.parse(data)
             temp[user.email] = user
             fs.writeFile("users.json", JSON.stringify(temp, null, 2), err => {
                 res.send("success")
@@ -37,5 +38,22 @@ router.post('/register', (req, res, next) => {
         res.send({"error": "Password not strong enough"})
     }
 })
+
+router.get('/login', function (req, res, next) {
+    res.render('login');
+});
+
+
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/users/page',
+        failureRedirect: '/'
+    })(req, res, next);
+});
+
+router.get('/page', function (req, res, next) {
+    let userData = req.user;
+    res.render('userpage', {userData})
+});
 
 module.exports = router;

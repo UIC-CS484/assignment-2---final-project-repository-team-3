@@ -1,25 +1,20 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var handlebars = require('express-handlebars');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const handlebars = require('express-handlebars');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var loginRouter = require('./routes/login')
-var loginHandlerRouter = require('./routes/loginHandler');
-var loginSuccRouter = require('./routes/userpage');
-
-const {log} = require("debug");
-var session = require("express-session");
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const session = require("express-session");
 const passport = require("passport");
 
-var app = express();
+const app = express();
 
 require('./config/passport')(passport);
 
-var sessionCfg = {
+const sessionCfg = {
     resave: true,
     cookie: {secure: true},
     saveUninitialized: true,
@@ -47,9 +42,6 @@ app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/login', loginRouter);
-app.use('/loginHandler',loginHandlerRouter);
-app.use('/userpage', loginSuccRouter);
 
 
 // catch 404 and forward to error handler

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var fs = require('fs');
-const passport = require('passport');
+let passport = require('passport');
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {

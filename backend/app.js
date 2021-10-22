@@ -8,7 +8,7 @@ const handlebars = require('express-handlebars');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const session = require("express-session");
-const passport = require("passport");
+let passport = require("passport");
 
 const app = express();
 

@@ -35,6 +35,7 @@ router.post('/register', (req, res, next) => {
             let temp = JSON.parse(data)
             temp[user.email] = user
             fs.writeFile("users.json", JSON.stringify(temp, null, 2), err => {
+                res.status(201);
                 res.render('login');
             });
         })

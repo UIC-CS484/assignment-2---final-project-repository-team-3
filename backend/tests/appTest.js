@@ -6,4 +6,15 @@ describe("Test Register", () => {
         const response = await supertest(app).post("/users/register");
         expect(response.statusCode).toBe(400);
     })
+    test("Proper registration details provided", async () => {
+        const data = {
+            firstName: "test",
+            lastName: "test2",
+            email: "test@test.com",
+            password: "Test123!"
+        }
+        const response = await supertest(app).post("/users/register").send(data);
+        expect(response.statusCode).toBe(201);
+    })
 })
+

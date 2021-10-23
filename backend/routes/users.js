@@ -39,6 +39,7 @@ router.post('/register', (req, res, next) => {
             });
         })
     } else {
+        res.status(400)
         res.send({"error": "Password not strong enough"})
     }
 })

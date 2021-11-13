@@ -10,7 +10,15 @@
 <body>
 
 <div class="container">
-    <h1 class="text-center">Hello {{userData.firstName}}</h1>
+    <h1 class="text-center">Hello {{userData.firstname}}</h1>
 </div>
+<form action="/users/favorite" method="POST">
+    <input type="text" id="pokemon_id" name="pokemon_id" placeholder="pokemon_id"><br>
+    <input type="submit" value="Submit">
+</form>
+<form action="/users/favorites" method="GET">
+    <p>Get Favorites</p>
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>

@@ -8,22 +8,22 @@ const handlebars = require('express-handlebars');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const session = require("express-session");
+const SQLiteStore = require('connect-sqlite3')(session);
 let passport = require("passport");
 
 const app = express();
 
 require('./config/passport')(passport);
 
-const sessionCfg = {
-    resave: true,
-    cookie: {secure: true},
+app.use(session({
+    store: new SQLiteStore({
+        db: 'sessions.sqlite',
+        dir: '.'
+    }),
     saveUninitialized: true,
-    secret: 'secret'
-}
-
-sessionCfg.cookie.secure = false;
-
-app.use(session(sessionCfg));
+    secret: 'secret',
+    cookie: {secure: false},
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

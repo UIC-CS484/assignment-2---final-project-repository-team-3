@@ -1,5 +1,4 @@
 const localStategy = require('passport-local').Strategy;
-const {use} = require("express/lib/router");
 var db = require("../database");
 var md5 = require('md5');
 

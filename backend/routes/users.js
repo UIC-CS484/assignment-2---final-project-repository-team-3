@@ -6,6 +6,8 @@ let passport = require('passport');
 var db = require("../database");
 var md5 = require('md5');
 const {get} = require("superagent/lib/client");
+var Pokedex = require('pokedex-promise-v2');
+var P = new Pokedex();
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -57,9 +59,13 @@ router.post('/login', (req, res, next) => {
     })(req, res, next);
 });
 
-router.get('/page', function (req, res, next) {
+router.get('/page', async function (req, res, next) {
     let userData = req.user;
-    res.render('userpage', {userData})
+
+    var pokeData = await P.getPokemonsList();
+    pokeData = pokeData.results;
+    console.log(pokeData);
+    res.render('userpage', {userData, pokeData})
 });
 
 router.post('/favorite', async (req, res, next) => {

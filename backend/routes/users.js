@@ -94,4 +94,17 @@ router.get('/favorites', (req, res, next) => {
     })
 })
 
+router.delete('/favorites', (req, res, next) => {
+    let user = req.user;
+    db.run("DELETE FROM favorites WHERE user_id = ? AND pokemon_id = ?", [user.id, req.body.pokemon_id], (err, result) => {
+        if (err) {
+            res.status(400).json({"error": err.message})
+        } else {
+            res.json({
+                "message": "success"
+            })
+        }
+    })
+})
+
 module.exports = router;

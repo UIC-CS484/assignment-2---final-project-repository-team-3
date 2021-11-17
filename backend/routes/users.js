@@ -5,6 +5,9 @@ var fs = require('fs');
 let passport = require('passport');
 var db = require("../database");
 var md5 = require('md5');
+const {get} = require("superagent/lib/client");
+var Pokedex = require('pokedex-promise-v2');
+var P = new Pokedex();
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -32,9 +35,9 @@ router.post('/register', (req, res, next) => {
             password: password
         }
         db.run(`INSERT INTO users (firstname, lastname, email, password) VALUES (?,?,?, ?)`, [user.firstName, user.lastName, user.email, md5(user.password)], (err, result) => {
-            if(err){
+            if (err) {
                 res.status(400).json({"error": err.message})
-            } else{
+            } else {
                 res.render('login')
             }
         })
@@ -52,13 +55,17 @@ router.get('/login', function (req, res, next) {
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/users/page',
-        failureRedirect: '/login'
+        failureRedirect: '/users/login'
     })(req, res, next);
 });
 
-router.get('/page', function (req, res, next) {
+router.get('/page', async function (req, res, next) {
     let userData = req.user;
-    res.render('userpage', {userData})
+
+    var pokeData = await P.getPokemonsList();
+    pokeData = pokeData.results;
+    console.log(pokeData);
+    res.render('userpage', {userData, pokeData})
 });
 
 router.post('/favorite', async (req, res, next) => {
@@ -83,13 +90,10 @@ router.post('/favorite', async (req, res, next) => {
 router.get('/favorites', (req, res, next) => {
     let user = req.user;
     db.all("SELECT * FROM favorites WHERE user_id = ?", [user.id], (err, rows) => {
-        if (err){
+        if (err) {
             res.status(400).json({"error": err.message})
         } else {
-            res.json({
-                "message": "success",
-                "favorites": rows
-            })
+            res.render('favoritePage', {user, rows})
         }
     })
 })

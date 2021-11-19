@@ -56,16 +56,13 @@
         $('#pokeList tbody').on('click', 'button', function () {
             var data = tbl.row($(this).parents('tr')).data();
             console.log(data)
-            axios({
-                method: 'post',
-                url: "/users/favorite",
-                data: {
-                    pokemon_id: data[0]
-                }
-            })
+            axios.post("/users/favorite",{
+                pokemon_id: data[0]
+            });
         }).then(res => console.log(res))
                 .catch(err => console.log(err))
     });
+
 </script>
 
 </body>

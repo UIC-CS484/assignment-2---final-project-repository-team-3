@@ -14,7 +14,7 @@ describe("Test Register", () => {
             password: "Test123!"
         }
         const response = await supertest(app).post("/users/register").send(data);
-        expect(response.statusCode).toBe(201);
+        expect(response.statusCode).toBe(200);
     })
 })
 

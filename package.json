@@ -1,4 +1,14 @@
 {
+<<<<<<< Updated upstream
+=======
+  "name": "backend",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./backend/bin/www",
+    "test": "jest"
+  },
+>>>>>>> Stashed changes
   "dependencies": {
     "axios": "^0.24.0",
     "md5": "^2.3.0",

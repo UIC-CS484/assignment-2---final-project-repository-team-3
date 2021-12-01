@@ -12,7 +12,7 @@ const SQLiteStore = require('connect-sqlite3')(session);
 let passport = require("passport");
 
 const app = express();
-const port = 3000;
+const port = 3001;
 
 require('./config/passport')(passport);
 

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "node bin/www",
     "test": "jest"
   },
   "dependencies": {
@@ -12,8 +12,8 @@
     "md5": "^2.3.0",
     "request": "^2.88.2",
     "sqlite3": "^5.0.2",
-    "axios": "^0.24.0",
     "cookie-parser": "~1.4.4",
+    "pokedex-promise-v2": "^3.3.2",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "express-handlebars": "^5.3.4",
@@ -26,6 +26,7 @@
     "passport-local": "^1.0.0"
   },
   "devDependencies": {
+    "axios": "^0.24.0",
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "jest": "^27.3.1",

@@ -12,13 +12,9 @@ const SQLiteStore = require('connect-sqlite3')(session);
 let passport = require("passport");
 
 const app = express();
-const port = 3000;
 
 require('./config/passport')(passport);
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
-})
 
 app.use(session({
     store: new SQLiteStore({

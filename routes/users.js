@@ -1,11 +1,9 @@
 var axios = require('axios')
 var express = require('express');
 var router = express.Router();
-var fs = require('fs');
 let passport = require('passport');
 var db = require("../database");
 var md5 = require('md5');
-const {get} = require("superagent/lib/client");
 var Pokedex = require('pokedex-promise-v2');
 var P = new Pokedex();
 

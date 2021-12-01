@@ -7,6 +7,10 @@
     "test": "jest"
   },
   "dependencies": {
+    "axios": "^0.24.0",
+    "md5": "^2.3.0",
+    "request": "^2.88.2",
+    "sqlite3": "^5.0.2",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",

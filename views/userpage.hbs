@@ -40,10 +40,7 @@
 </div>
 
 
-<form action="/users/favorite" method="POST">
-    <input type="text" id="pokemon_id" name="pokemon_id" placeholder="pokemon_id"><br>
-    <input type="submit" value="Submit">
-</form>
+
 <form action="/users/favorites" method="GET">
     <p>Get Favorites</p>
     <input type="submit" value="Submit">
@@ -55,7 +52,6 @@
         var tbl = $('#pokeList').DataTable();
         $('#pokeList tbody').on('click', 'button', function () {
             var data = tbl.row($(this).parents('tr')).data();
-            console.log(data)
             axios.post("/users/favorite",{
                 pokemon_id: data[0]
             });

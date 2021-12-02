@@ -62,7 +62,6 @@ router.get('/page', async function (req, res, next) {
 
     var pokeData = await P.getPokemonsList();
     pokeData = pokeData.results;
-    console.log(pokeData);
     res.render('userpage', {userData, pokeData})
 });
 

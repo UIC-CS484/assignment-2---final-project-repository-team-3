@@ -50,17 +50,17 @@
             <tr>
                 <td>{{name}}</td>
                 <td>
-                    <button class="btn btn-success">Add To Box</button>
+                    <button class="btn btn-outline-success">Add To Box</button>
                 </td>
             </tr>
         {{/each}}
         </tbody>
     </table>
 </div>
-<br/>
+<br/><br/>
 <div class="container text-center">
     <form action="/users/favorites" method="GET" class="">
-        <input class="btn btn-success" type="submit" value="View Your Box">
+        <input class="btn btn-outline-primary" style="width: 20vw;" type="submit" value="View Your Box!">
     </form>
 </div>
 
@@ -74,7 +74,7 @@
                 pokemon_id: data[0]
             }).then(res => {
                 console.log("done")
-                $('.toast').toast(true,true,300);
+                $('.toast').toast(true, true, 300);
                 $('.toast').toast('show');
             })
                     .catch(err => console.log(err))

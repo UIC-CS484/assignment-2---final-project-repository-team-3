@@ -2,6 +2,8 @@
 
 ## Project Info
 
+Site URL: https://cs484-project-team-3.herokuapp.com/
+
 ### Site Info/Goal
 
 This website provides an easy interface for users to track their favorite Pokemon/the Pokemon they possess across all their games in one convenient place. 

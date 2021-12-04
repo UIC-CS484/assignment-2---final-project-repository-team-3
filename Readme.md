@@ -12,10 +12,10 @@ It also provides users with an opportunity to see their most common types (Fire,
 ### Team Members
 
 Dhyan Patel - Primarily focused on backend, worked on database setup and queries, made refinements to passport.js
-implementation, took the lead on configuring github actions
+implementation, took the lead on configuring github actions and Heroku deployment
 
-Nikhil Prasad - Primarily focused on frontend, worked on passport.js setup, some REST API querying, assisted in database
-tasks
+Nikhil Prasad - Primarily focused on frontend, worked on passport.js setup, worked with REST API querying for populating the frontend, assisted in database
+design
 
 ### RESTful API
 
@@ -39,15 +39,22 @@ res.render('userpage', {userData, pokeData})
 
 ## Deployment
 
+The application is configured to automatically deploy to a Heroku App whenever a commit or merged branch is added to the
+`main` branch of the Github repository. This is done via an app connection to GitHub inside of Heroku. Deployment is
+configured to only begin after CI passes, which allows the repository to test the application before deployment.
 
 ## Testing
 
+Testing is done via GitHub Actions. We're using a workflow called Node.js CI, and it is configured to test the application
+using Node.js version 12, which is the version we're deploying with, and the version which we developed the application using.
+The application uses Jest for running test cases and testing the application.
+
 ### Tests Created
 
-"Test Register" - Registration failure due to bad (missing) input - Makes sure that accounts are not created when given
+"Test Register Failure" - Registration failure due to bad (missing) input - Makes sure that accounts are not created when given
 improper input
 
-"Test Register" - Registration success when given proper input - Makes sure that accounts are successfully created
+"Test Register Success" - Registration success when given proper input - Makes sure that accounts are successfully created
 
 ### Information
 

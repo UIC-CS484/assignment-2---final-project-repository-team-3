@@ -8,7 +8,7 @@ Site URL: https://cs484-project-team-3.herokuapp.com/
 
 This website provides an easy interface for users to track their favorite Pokemon/the Pokemon they possess across all their games in one convenient place. 
 
-It also provides users with an opportunity to see their most common types (Fire, Water, Grass etc...) of Pokemon in their library.
+It also provides users with an opportunity to see their most common types (Fire, Water, Grass etc...) of Pokemon in their library in the form of charts.
 
 
 ### Team Members
@@ -22,7 +22,7 @@ design
 ### RESTful API
 
 Our team used PokeAPI, a RESTful API that consists of data on every current Pokemon. The API was directly queried and a
-node package (Pokedex-Promise) was used to query the API
+node package (Pokedex-Promise) was used to query the API.
 
 Code snippets below:
 
@@ -60,11 +60,4 @@ improper input
 
 ### Information
 
-The above tests cover all the registration feature's logic.
-
-Future tests should follow a similar structure and tests.
-
-So far, we've made use of tables to show the user's favorite Pokemon. This table is sortable and users can view their
-most recently or oldest favorited pokemon in their collection. Users can also order results alphabetically.
-
-More data visualization is planned to be added but not concrete.
+The above tests cover all the registration feature's logic

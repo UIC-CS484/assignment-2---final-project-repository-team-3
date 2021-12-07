@@ -12,6 +12,38 @@ router.get('/', function (req, res, next) {
     res.send('respond with a resource');
 });
 
+router.patch('/updatePassword', (req, res, next) => {
+    const email = req.body.email;
+    const newPassword = req.body.newPassword;
+    let strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
+
+    if (strongPassword.test(newPassword)) {
+        db.run('UPDATE users SET password = ? WHERE email = ?', [email, md5(newPassword)], (err, result) => {
+            if (err) {
+                res.status(400).json({"error": err.message})
+            } else {
+                res.render('login')
+            }
+        })
+    } else {
+        res.status(400);
+        res.send({"error": "password not strong enough"})
+    }
+})
+
+router.delete('/account', (req, res, next) => {
+    const email = req.body.email;
+    db.run('DELETE FROM users WHERE email = ?;', [email], (err, result) => {
+        if (err) {
+            res.status(400).json({"error": err.message})
+        } else {
+            res.json({
+                "message": "account deleted"
+            })
+        }
+    })
+})
+
 router.get('/register', function (req, res, next) {
     res.render('register');
 });

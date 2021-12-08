@@ -16,7 +16,7 @@
 
 <body>
 <div class="bg-dark d-flex flex-column min-vh-100 justify-content-center align-items-center">
-    <h1 class="text-center text-light">Edit User Details</h1>
+    <h1 class="text-center text-light" style="width: ;">Edit User Details</h1>
     <form
             method="POST"
             action="/users/updatePassword"
@@ -36,12 +36,13 @@
             <input type="password" required class="form-control" name="verifyNew" id="verifyNew"
                    placeholder="Verify New Password">
         </div>
-
-        <button class="btn btn-outline-primary">Submit</button>
+        <br/>
+        <button style="width: 25vw" class="btn btn-outline-primary">Submit</button>
     </form>
+    <br/>
 
-    <div class="form-group" style="width: 25vw">
-        <button class="btn btn-outline-danger" onclick="deleteAccount()">Delete Account</button>
+    <div class="form-group">
+        <button class="btn btn-outline-danger" style="width: 25vw" onclick="deleteAccount()">Delete Account</button>
     </div>
 
 

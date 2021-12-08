@@ -22,7 +22,7 @@
             action="/users/updatePassword"
             oninput='verifyNew.setCustomValidity(verifyNew.value !== newPassword.value ? "New passwords do not match." : "")'>
         <div class="form-group" style="width: 25vw">
-            <label class="text-light" for="email">Verify Current Password</label>
+            <label class="text-light" for="email">Email</label>
             <input type="email" required class="form-control" name="email" id="email"
                    value="{{userData.email}}">
         </div>
@@ -40,14 +40,29 @@
         <button class="btn btn-outline-primary">Submit</button>
     </form>
 
-    <form method="post" action="/users/account">
-        <div class="form-group" style="width: 25vw">
-            <button class="btn btn-outline-danger">Delete Account</button>
-        </div>
-    </form>
+    <div class="form-group" style="width: 25vw">
+        <button class="btn btn-outline-danger" onclick="deleteAccount()">Delete Account</button>
+    </div>
 
 
 </div>
 </body>
+
+<script>
+    function deleteAccount() {
+        var email = "{{userData.email}}"
+        if (confirm("Are you sure you want to delete your account?")) {
+            if (confirm("This is not reversible, continue?")) {
+                axios.delete('/users/account', {
+                    data: {
+                        email: email
+                    }
+                }).then(function () {
+                    window.location = "/"
+                })
+            }
+        }
+    }
+</script>
 
 </html>

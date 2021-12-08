@@ -31,14 +31,16 @@ router.post('/updatePassword', (req, res, next) => {
     }
 })
 
-router.post('/account', (req, res, next) => {
+router.delete('/account', (req, res, next) => {
     const email = req.body.email;
     db.run(`DELETE FROM users WHERE email = ?;`, [email], (err, result) => {
         if (err) {
             res.status(400).json({"error": err.message})
         } else {
-            res.json({
-                "message": "account deleted"
+            req.logout();
+            res.clearCookie('connect.sid')
+            req.session.destroy(function (err) {
+                res.render("index")
             })
         }
     })

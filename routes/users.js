@@ -12,6 +12,40 @@ router.get('/', function (req, res, next) {
     res.send('respond with a resource');
 });
 
+router.post('/updatePassword', (req, res, next) => {
+    const email = req.body.email;
+    const newPassword = req.body.newPassword;
+    let strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
+
+    if (strongPassword.test(newPassword)) {
+        db.run(`UPDATE users SET password = ? WHERE email = ?`, [md5(newPassword), email], (err, result) => {
+            if (err) {
+                res.status(400).json({"error": err.message})
+            } else {
+                res.render('login')
+            }
+        })
+    } else {
+        res.status(400);
+        res.send({"error": "password not strong enough"})
+    }
+})
+
+router.delete('/account', (req, res, next) => {
+    const email = req.body.email;
+    db.run(`DELETE FROM users WHERE email = ?;`, [email], (err, result) => {
+        if (err) {
+            res.status(400).json({"error": err.message})
+        } else {
+            req.logout();
+            res.clearCookie('connect.sid')
+            req.session.destroy(function (err) {
+                res.render("index")
+            })
+        }
+    })
+})
+
 router.get('/register', function (req, res, next) {
     res.render('register');
 });
@@ -64,6 +98,11 @@ router.get('/page', async function (req, res, next) {
     pokeData = pokeData.results;
     res.render('userpage', {userData, pokeData})
 });
+
+router.get('/edit', async function (req, res,) {
+    let userData = req.user;
+    res.render('userEdit', {userData});
+})
 
 router.post('/favorite', async (req, res, next) => {
     let user = req.user;
